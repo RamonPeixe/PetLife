@@ -1,19 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarTb"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:titleTextColor="@color/white"
+        android:background="@color/design_default_color_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/nomePetTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Pet: Atlas"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarTb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/dataNascimentoTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data de Nascimento: 10/12/2019"
+        app:layout_constraintTop_toBottomOf="@id/nomePetTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tipoPetTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo: Cachorro"
+        app:layout_constraintTop_toBottomOf="@id/dataNascimentoTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/corPetTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cor: Preto e Branco"
+        app:layout_constraintTop_toBottomOf="@id/tipoPetTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/portePetTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Porte: Médio"
+        app:layout_constraintTop_toBottomOf="@id/corPetTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/ultimaVisitaVeterinarioTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Última visita ao veterinário: 01/09/2024"
+        app:layout_constraintTop_toBottomOf="@id/portePetTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/ultimaVacinaTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Última vacinação: 15/08/2024"
+        app:layout_constraintTop_toBottomOf="@id/ultimaVisitaVeterinarioTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/ultimaIdaPetshopTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Última ida ao petshop: 10/09/2024"
+        app:layout_constraintTop_toBottomOf="@id/ultimaVacinaTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
