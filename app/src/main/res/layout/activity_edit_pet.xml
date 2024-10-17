@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditPetActivity">
+
+    <EditText
+        android:id="@+id/nomePetEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Pet"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <EditText
+        android:id="@+id/dataNascimentoPetEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Data de Nascimento"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/nomePetEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <EditText
+        android:id="@+id/tipoPetEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tipo do Pet"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/dataNascimentoPetEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <EditText
+        android:id="@+id/corPetEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Cor do Pet"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/tipoPetEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <EditText
+        android:id="@+id/portePetEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Porte do Pet"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/corPetEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <Button
+        android:id="@+id/salvarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        app:layout_constraintTop_toBottomOf="@id/portePetEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
