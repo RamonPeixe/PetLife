@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityEditPetBinding
 
 class EditPetActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityEditPetBinding
+    private lateinit var aepb: ActivityEditPetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityEditPetBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        aepb = ActivityEditPetBinding.inflate(layoutInflater)
+        setContentView(aepb.root)
 
         val nomePet = intent.getStringExtra("nome") ?: "Nome não informado"
         val dataNascimento = intent.getStringExtra("dataNascimento") ?: "Data não informada"
@@ -21,19 +21,19 @@ class EditPetActivity : AppCompatActivity() {
         val cor = intent.getStringExtra("cor") ?: "Cor não informada"
         val porte = intent.getStringExtra("porte") ?: "Porte não informado"
 
-        binding.nomePetEt.setText(nomePet)
-        binding.dataNascimentoPetEt.setText(dataNascimento)
-        binding.tipoPetEt.setText(tipo)
-        binding.corPetEt.setText(cor)
-        binding.portePetEt.setText(porte)
+        aepb.nomePetEt.setText(nomePet)
+        aepb.dataNascimentoPetEt.setText(dataNascimento)
+        aepb.tipoPetEt.setText(tipo)
+        aepb.corPetEt.setText(cor)
+        aepb.portePetEt.setText(porte)
 
-        binding.salvarBtn.setOnClickListener {
+        aepb.salvarBtn.setOnClickListener {
             val resultadoIntent = Intent().apply {
-                putExtra("nome", binding.nomePetEt.text.toString())
-                putExtra("dataNascimento", binding.dataNascimentoPetEt.text.toString())
-                putExtra("tipo", binding.tipoPetEt.text.toString())
-                putExtra("cor", binding.corPetEt.text.toString())
-                putExtra("porte", binding.portePetEt.text.toString())
+                putExtra("nome", aepb.nomePetEt.text.toString())
+                putExtra("dataNascimento", aepb.dataNascimentoPetEt.text.toString())
+                putExtra("tipo", aepb.tipoPetEt.text.toString())
+                putExtra("cor", aepb.corPetEt.text.toString())
+                putExtra("porte", aepb.portePetEt.text.toString())
             }
 
             setResult(Activity.RESULT_OK, resultadoIntent)

@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pet: Pet
 
     private lateinit var editPetLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editVeterinarioLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        editVeterinarioLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    pet = pet.copy(
+                        ultimaVisitaVeterinario = it.getStringExtra("ultimaVisitaVeterinario")
+                            ?: pet.ultimaVisitaVeterinario
+                    )
+                    exibirInformacoesPet(pet)
+                }
+            }
+        }
+
         amb.editarDadosPetBtn.setOnClickListener {
             val intent = Intent(this, EditPetActivity::class.java).apply {
                 putExtra("nome", pet.nome)
@@ -64,6 +79,13 @@ class MainActivity : AppCompatActivity() {
                 putExtra("porte", pet.porte)
             }
             editPetLauncher.launch(intent)
+        }
+
+        amb.editarVeterinarioBtn.setOnClickListener {
+            val intent = Intent(this, EditVeterinarioActivity::class.java).apply {
+                putExtra("ultimaVisitaVeterinario", pet.ultimaVisitaVeterinario)
+            }
+            editVeterinarioLauncher.launch(intent)
         }
     }
 
