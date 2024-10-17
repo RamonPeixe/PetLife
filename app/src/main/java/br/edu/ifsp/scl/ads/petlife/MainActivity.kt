@@ -1,6 +1,9 @@
 package br.edu.ifsp.scl.ads.petlife
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
 
@@ -8,6 +11,10 @@ class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    private lateinit var pet: Pet
+
+    private lateinit var editPetLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +25,11 @@ class MainActivity : AppCompatActivity() {
             subtitle = this@MainActivity.javaClass.simpleName
         }
 
-        val pet = Pet(
+        pet = Pet(
             nome = "Atlas",
             dataNascimento = "10/10/2020",
             tipo = "Cachorro",
-            cor = "Marrom",
+            cor = "Preto e Branco",
             porte = "Médio",
             ultimaVisitaVeterinario = "01/09/2024",
             ultimaVacina = "15/08/2024",
@@ -30,6 +37,34 @@ class MainActivity : AppCompatActivity() {
         )
 
         exibirInformacoesPet(pet)
+
+        editPetLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    pet = pet.copy(
+                        nome = it.getStringExtra("nome") ?: pet.nome,
+                        dataNascimento = it.getStringExtra("dataNascimento") ?: pet.dataNascimento,
+                        tipo = it.getStringExtra("tipo") ?: pet.tipo,
+                        cor = it.getStringExtra("cor") ?: pet.cor,
+                        porte = it.getStringExtra("porte") ?: pet.porte
+                    )
+                    exibirInformacoesPet(pet)
+                }
+            }
+        }
+
+        amb.editarDadosPetBtn.setOnClickListener {
+            val intent = Intent(this, EditPetActivity::class.java).apply {
+                putExtra("nome", pet.nome)
+                putExtra("dataNascimento", pet.dataNascimento)
+                putExtra("tipo", pet.tipo)
+                putExtra("cor", pet.cor)
+                putExtra("porte", pet.porte)
+            }
+            editPetLauncher.launch(intent)
+        }
     }
 
     private fun exibirInformacoesPet(pet: Pet) {
