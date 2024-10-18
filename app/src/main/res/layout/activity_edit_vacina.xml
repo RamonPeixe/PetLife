@@ -12,11 +12,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Data da última visita vacinação"
+        android:inputType="date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        android:inputType="date"/>
+        android:layout_margin="16dp"/>
 
     <Button
         android:id="@+id/salvarBtn"
