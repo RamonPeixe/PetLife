@@ -28,13 +28,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
-
-    <EditText
-        android:id="@+id/tipoPetEt"
+    
+    <Spinner
+        android:id="@+id/tipoPetSp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Tipo do Pet"
-        android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/dataNascimentoPetEt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +44,7 @@
         android:layout_height="wrap_content"
         android:hint="Cor do Pet"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/tipoPetEt"
+        app:layout_constraintTop_toBottomOf="@id/tipoPetSp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />

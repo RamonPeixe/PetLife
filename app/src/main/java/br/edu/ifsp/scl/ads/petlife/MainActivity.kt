@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         pet = Pet(
             nome = "Atlas",
             dataNascimento = "10/10/2020",
-            tipo = "Cachorro",
+            tipo = "Cão",
             cor = "Preto e Branco",
             porte = "Médio",
             ultimaVisitaVeterinario = "01/09/2024",
