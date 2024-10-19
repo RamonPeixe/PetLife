@@ -15,8 +15,12 @@ class EditPetActivity : AppCompatActivity() {
         setContentView(aepb.root)
 
         val tiposPet = arrayOf("Cão", "Gato")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposPet)
-        aepb.tipoPetSp.adapter = adapter
+        val adapterTipo = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposPet)
+        aepb.tipoPetSp.adapter = adapterTipo
+
+        val portesPet = arrayOf("Pequeno", "Médio", "Grande")
+        val adapterPorte = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, portesPet)
+        aepb.portePetSp.adapter = adapterPorte
 
         val nome = intent.getStringExtra("nome") ?: "Nome não informado"
         val dataNascimento = intent.getStringExtra("dataNascimento") ?: "Data não informada"
@@ -27,10 +31,12 @@ class EditPetActivity : AppCompatActivity() {
         aepb.nomePetEt.setText(nome)
         aepb.dataNascimentoPetEt.setText(dataNascimento)
         aepb.corPetEt.setText(cor)
-        aepb.portePetEt.setText(porte)
 
-        val position = adapter.getPosition(tipo)
-        aepb.tipoPetSp.setSelection(position)
+        val positionTipo = adapterTipo.getPosition(tipo)
+        aepb.tipoPetSp.setSelection(positionTipo)
+
+        val positionPorte = adapterPorte.getPosition(porte)
+        aepb.portePetSp.setSelection(positionPorte)
 
         aepb.salvarBtn.setOnClickListener {
             val intent = intent.apply {
@@ -38,7 +44,7 @@ class EditPetActivity : AppCompatActivity() {
                 putExtra("dataNascimento", aepb.dataNascimentoPetEt.text.toString())
                 putExtra("tipo", aepb.tipoPetSp.selectedItem.toString())
                 putExtra("cor", aepb.corPetEt.text.toString())
-                putExtra("porte", aepb.portePetEt.text.toString())
+                putExtra("porte", aepb.portePetSp.selectedItem.toString())
             }
             setResult(RESULT_OK, intent)
             finish()

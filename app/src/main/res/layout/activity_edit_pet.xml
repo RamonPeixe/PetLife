@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
-    
+
     <Spinner
         android:id="@+id/tipoPetSp"
         android:layout_width="0dp"
@@ -49,12 +49,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
 
-    <EditText
-        android:id="@+id/portePetEt"
+    <Spinner
+        android:id="@+id/portePetSp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Porte do Pet"
-        android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/corPetEt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salvar"
-        app:layout_constraintTop_toBottomOf="@id/portePetEt"
+        app:layout_constraintTop_toBottomOf="@id/portePetSp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
