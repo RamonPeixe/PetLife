@@ -27,6 +27,8 @@
         <activity android:name=".EditVeterinarioActivity" />
 
         <activity android:name=".EditVacinaActivity" />
+
+        <activity android:name=".EditPetshopActivity" />
     </application>
 
 </manifest>

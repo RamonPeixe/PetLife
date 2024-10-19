@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editPetLauncher: ActivityResultLauncher<Intent>
     private lateinit var editVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editVacinaLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editPetshopLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(amb.toolbarTb)
         supportActionBar?.apply {
             title = getString(R.string.app_name)
-            subtitle = this@MainActivity.javaClass.simpleName
         }
 
         pet = Pet(
@@ -84,6 +84,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        editPetshopLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    pet = pet.copy(
+                        ultimaIdaPetshop = it.getStringExtra("ultimaIdaPetshop")
+                            ?: pet.ultimaIdaPetshop
+                    )
+                    exibirInformacoesPet(pet)
+                }
+            }
+        }
+
         amb.editarDadosPetBtn.setOnClickListener {
             val intent = Intent(this, EditPetActivity::class.java).apply {
                 putExtra("nome", pet.nome)
@@ -107,6 +121,13 @@ class MainActivity : AppCompatActivity() {
                 putExtra("ultimaVacina", pet.ultimaVacina)
             }
             editVacinaLauncher.launch(intent)
+        }
+
+        amb.editarPetshopBtn.setOnClickListener {
+            val intent = Intent(this, EditPetshopActivity::class.java).apply {
+                putExtra("ultimaIdaPetshop", pet.ultimaIdaPetshop)
+            }
+            editPetshopLauncher.launch(intent)
         }
     }
 
