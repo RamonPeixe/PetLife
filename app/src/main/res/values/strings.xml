@@ -8,6 +8,13 @@
     <string name="nome_pet_hint">Nome do Pet</string>
     <string name="data_nascimento_pet_hint">Data de Nascimento</string>
     <string name="cor_pet_hint">Cor do Pet</string>
+    <!-- Tipos de Pet -->
+    <string name="tipo_pet_cao">Cão</string>
+    <string name="tipo_pet_gato">Gato</string>
+    <!-- Portes de Pet -->
+    <string name="porte_pet_pequeno">Pequeno</string>
+    <string name="porte_pet_medio">Médio</string>
+    <string name="porte_pet_grande">Grande</string>
 
     <!-- Petshop -->
     <string name="ultima_ida_petshop_hint">Data da última ida ao petshop</string>

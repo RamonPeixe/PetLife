@@ -16,12 +16,12 @@ class EditPetActivity : AppCompatActivity() {
         setContentView(aepb.root)
 
         //Configura o spinner tipos
-        val tiposPet = arrayOf("Cão", "Gato")
+        val tiposPet = arrayOf(getString(R.string.tipo_pet_cao), getString(R.string.tipo_pet_gato))
         val adapterTipo = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposPet)
         aepb.tipoPetSp.adapter = adapterTipo
 
         //Configura o spinner portes
-        val portesPet = arrayOf("Pequeno", "Médio", "Grande")
+        val portesPet = arrayOf(getString(R.string.porte_pet_pequeno), getString(R.string.porte_pet_medio), getString(R.string.porte_pet_grande))
         val adapterPorte = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, portesPet)
         aepb.portePetSp.adapter = adapterPorte
 
@@ -54,7 +54,7 @@ class EditPetActivity : AppCompatActivity() {
                 putExtra("porte", aepb.portePetSp.selectedItem.toString())
             }
             setResult(RESULT_OK, intent)
-            finish()
+            finish()  //Finaliza a activity
         }
     }
 }
