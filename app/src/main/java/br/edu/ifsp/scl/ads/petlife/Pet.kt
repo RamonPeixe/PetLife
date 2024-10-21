@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.petlife
 
+//Define classe Pet com os dados
 data class Pet(
     val nome: String,
     val dataNascimento: String,

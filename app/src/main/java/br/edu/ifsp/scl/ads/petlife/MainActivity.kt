@@ -12,8 +12,10 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    //Cria objeto Pet
     private lateinit var pet: Pet
 
+    //Launchers
     private lateinit var editPetLauncher: ActivityResultLauncher<Intent>
     private lateinit var editVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editVacinaLauncher: ActivityResultLauncher<Intent>
@@ -21,12 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Define o layout
         setContentView(amb.root)
+        //Configura a toolbar
         setSupportActionBar(amb.toolbarTb)
+
         supportActionBar?.apply {
             title = getString(R.string.app_name)
         }
 
+        //Inicializa os dados do pet pré definido
         pet = Pet(
             nome = "Atlas",
             dataNascimento = "10/10/2020",
@@ -38,8 +44,9 @@ class MainActivity : AppCompatActivity() {
             ultimaIdaPetshop = "10/09/2024"
         )
 
-        exibirInformacoesPet(pet)
+        exibirInformacoesPet(pet) //Exibe os dados do pet
 
+        //Configura o launcher para editar os dados do pet
         editPetLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -52,25 +59,26 @@ class MainActivity : AppCompatActivity() {
                         cor = it.getStringExtra("cor") ?: pet.cor,
                         porte = it.getStringExtra("porte") ?: pet.porte
                     )
-                    exibirInformacoesPet(pet)
+                    exibirInformacoesPet(pet) //Atualiza os dados depois da edição
                 }
             }
         }
 
+        //Configura o launcher para editar a última visita ao veterinário
         editVeterinarioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
                 result.data?.let {
                     pet = pet.copy(
-                        ultimaVisitaVeterinario = it.getStringExtra("ultimaVisitaVeterinario")
-                            ?: pet.ultimaVisitaVeterinario
+                        ultimaVisitaVeterinario = it.getStringExtra("ultimaVisitaVeterinario") ?: pet.ultimaVisitaVeterinario
                     )
-                    exibirInformacoesPet(pet)
+                    exibirInformacoesPet(pet) //Atualiza os dados depois da edição
                 }
             }
         }
 
+        //Configura o launcher para editar a última vacina
         editVacinaLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -79,25 +87,26 @@ class MainActivity : AppCompatActivity() {
                     pet = pet.copy(
                         ultimaVacina = it.getStringExtra("ultimaVacina") ?: pet.ultimaVacina
                     )
-                    exibirInformacoesPet(pet)
+                    exibirInformacoesPet(pet) //Atualiza os dados depois da edição
                 }
             }
         }
 
+        //Configura o launcher para editar a última ida ao petshop
         editPetshopLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
                 result.data?.let {
                     pet = pet.copy(
-                        ultimaIdaPetshop = it.getStringExtra("ultimaIdaPetshop")
-                            ?: pet.ultimaIdaPetshop
+                        ultimaIdaPetshop = it.getStringExtra("ultimaIdaPetshop") ?: pet.ultimaIdaPetshop
                     )
-                    exibirInformacoesPet(pet)
+                    exibirInformacoesPet(pet) //Atualiza os dados depois da edição
                 }
             }
         }
 
+        //Configura o botão para editar os dados do pet
         amb.editarDadosPetBtn.setOnClickListener {
             val intent = Intent(this, EditPetActivity::class.java).apply {
                 putExtra("nome", pet.nome)
@@ -106,31 +115,35 @@ class MainActivity : AppCompatActivity() {
                 putExtra("cor", pet.cor)
                 putExtra("porte", pet.porte)
             }
-            editPetLauncher.launch(intent)
+            editPetLauncher.launch(intent) //Chama a activity para editar
         }
 
+        //Configura o botão para editar a última visita ao veterinário
         amb.editarVeterinarioBtn.setOnClickListener {
             val intent = Intent(this, EditVeterinarioActivity::class.java).apply {
                 putExtra("ultimaVisitaVeterinario", pet.ultimaVisitaVeterinario)
             }
-            editVeterinarioLauncher.launch(intent)
+            editVeterinarioLauncher.launch(intent) //Chama a activity para editar
         }
 
+        //Configura o botão para editar a última vacina
         amb.editarVacinaBtn.setOnClickListener {
             val intent = Intent(this, EditVacinaActivity::class.java).apply {
                 putExtra("ultimaVacina", pet.ultimaVacina)
             }
-            editVacinaLauncher.launch(intent)
+            editVacinaLauncher.launch(intent) //Chama a activity para editar
         }
 
+        //Configura o botão para editar a última ida ao petshop
         amb.editarPetshopBtn.setOnClickListener {
             val intent = Intent(this, EditPetshopActivity::class.java).apply {
                 putExtra("ultimaIdaPetshop", pet.ultimaIdaPetshop)
             }
-            editPetshopLauncher.launch(intent)
+            editPetshopLauncher.launch(intent) //Chama a activity para editar
         }
     }
 
+    //Função para exibir as informações do pet
     private fun exibirInformacoesPet(pet: Pet) {
         amb.nomePetTv.text = "Nome do Pet: ${pet.nome}"
         amb.dataNascimentoTv.text = "Data de Nascimento: ${pet.dataNascimento}"
