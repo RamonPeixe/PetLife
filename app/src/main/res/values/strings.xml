@@ -33,7 +33,7 @@
     <string name="ultima_ida_petshop_label">Última ida ao petshop: %1$s</string>
 
     <!-- Botões -->
-    <string name="editar_dados_pet">Editar Dados do Pet</string>
+    <string name="editar_dados_pet">Editar Informações do Pet</string>
     <string name="editar_visita_veterinario">Editar Visita ao Veterinário</string>
     <string name="editar_vacina">Editar Última Vacinação</string>
     <string name="editar_ida_petshop">Editar Última Ida ao Petshop</string>
