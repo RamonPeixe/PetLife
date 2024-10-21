@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">PetLife</string>
+
+    <!-- Veterinário -->
+    <string name="ultima_visita_veterinario_hint">Data da última visita ao veterinário</string>
+
+    <!-- Pet -->
+    <string name="nome_pet_hint">Nome do Pet</string>
+    <string name="data_nascimento_pet_hint">Data de Nascimento</string>
+    <string name="cor_pet_hint">Cor do Pet</string>
+
+    <!-- Petshop -->
+    <string name="ultima_ida_petshop_hint">Data da última ida ao petshop</string>
+
+    <!-- Vacina -->
+    <string name="ultima_vacina_hint">Data da última vacinação</string>
+
+    <!-- Main -->
+    <string name="nome_pet_label">Nome do Pet: %1$s</string>
+    <string name="data_nascimento_label">Data de Nascimento: %1$s</string>
+    <string name="tipo_pet_label">Tipo: %1$s</string>
+    <string name="cor_pet_label">Cor: %1$s</string>
+    <string name="porte_pet_label">Porte: %1$s</string>
+    <string name="ultima_visita_veterinario_label">Última visita ao veterinário: %1$s</string>
+    <string name="ultima_vacina_label">Última vacinação: %1$s</string>
+    <string name="ultima_ida_petshop_label">Última ida ao petshop: %1$s</string>
+
+    <!-- Botões -->
+    <string name="editar_dados_pet">Editar Dados do Pet</string>
+    <string name="editar_visita_veterinario">Editar Visita ao Veterinário</string>
+    <string name="editar_vacina">Editar Última Vacinação</string>
+    <string name="editar_ida_petshop">Editar Última Ida ao Petshop</string>
+    <string name="salvar">Salvar</string>
 </resources>
