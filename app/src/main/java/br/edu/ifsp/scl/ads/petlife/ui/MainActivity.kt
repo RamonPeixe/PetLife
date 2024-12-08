@@ -74,6 +74,16 @@ class MainActivity : AppCompatActivity() {
 
         registerForContextMenu(amb.petLv)
 
+        // Clique curto para abrir a tela de eventos
+        amb.petLv.setOnItemClickListener { _, _, position, _ ->
+            val selectedPet = petList[position]
+            val intent = Intent(this, EventActivity::class.java).apply {
+                putExtra("id", selectedPet.id)
+                putExtra("nome", selectedPet.nome)
+            }
+            startActivity(intent)
+        }
+
         amb.addPetBtn.setOnClickListener {
             val intent = Intent(this, EditPetActivity::class.java)
             editPetLauncher.launch(intent)
@@ -113,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.removePetMi -> {
-                //mainController.removePet(selectedPet.id)
+                mainController.removePet(selectedPet.id)
                 loadPets()
                 true
             }

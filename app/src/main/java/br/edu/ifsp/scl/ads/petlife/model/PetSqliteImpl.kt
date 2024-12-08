@@ -86,4 +86,8 @@ class PetSqliteImpl(context: Context) : PetDao {
             arrayOf(pet.id.toString())
         )
     }
+
+    override fun deletePet(id: Int): Int {
+        return database.delete(PET_TABLE, "$ID_COLUMN = ?", arrayOf(id.toString()))
+    }
 }
