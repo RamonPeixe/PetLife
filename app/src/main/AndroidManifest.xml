@@ -24,6 +24,8 @@
 
         <activity android:name=".ui.EditPetActivity" />
         <activity android:name=".ui.EventActivity" />
+        <activity android:name=".ui.AddEventActivity" />
+
     </application>
 
 </manifest>

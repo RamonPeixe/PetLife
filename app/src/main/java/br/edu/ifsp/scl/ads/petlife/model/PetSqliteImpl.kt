@@ -36,7 +36,7 @@ class PetSqliteImpl(context: Context) : PetDao {
         try {
             database.execSQL(CREATE_PET_TABLE_STATEMENT)
         } catch (e: Exception) {
-            Log.e("PetLife", "Error creating database: ${e.message}")
+            Log.e("PetSqliteImpl", "Error creating database: ${e.message}")
         }
     }
 
