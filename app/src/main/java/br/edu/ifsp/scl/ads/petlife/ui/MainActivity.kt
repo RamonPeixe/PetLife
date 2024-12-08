@@ -2,6 +2,10 @@ package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.R
@@ -27,6 +31,19 @@ class MainActivity : AppCompatActivity() {
         amb.petLv.adapter = petAdapter
         loadPets()
 
+        registerForContextMenu(amb.petLv)
+
+        // Clique rápido para abrir EventActivity
+        amb.petLv.setOnItemClickListener { _, _, position, _ ->
+            val selectedPet = petList[position]
+            val intent = Intent(this, EventActivity::class.java).apply {
+                putExtra("petName", selectedPet.nome)
+                putExtra("petType", selectedPet.tipo)
+            }
+            startActivity(intent)
+        }
+
+        // Clique para adicionar pet
         val editPetLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -42,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                         ultimaVacina = "",
                         ultimaIdaPetshop = ""
                     )
-                    mainController.insertPet(pet)  // Usando o MainController
+                    mainController.insertPet(pet)
                     loadPets()
                 }
             }
@@ -58,5 +75,35 @@ class MainActivity : AppCompatActivity() {
         petList.clear()
         petList.addAll(mainController.getPets())
         petAdapter.notifyDataSetChanged()
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        menuInflater.inflate(R.menu.context_menu_pet, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+        val selectedPet = petList[info.position]
+
+        return when (item.itemId) {
+            R.id.editPetMi -> {
+                val intent = Intent(this, EditPetActivity::class.java).apply {
+                    putExtra("nome", selectedPet.nome)
+                    putExtra("tipo", selectedPet.tipo)
+                }
+                startActivity(intent)
+                true
+            }
+            R.id.removePetMi -> {
+                //mainController.removePet(selectedPet.nome)
+                loadPets()
+                true
+            }
+            else -> super.onContextItemSelected(item)
+        }
     }
 }
