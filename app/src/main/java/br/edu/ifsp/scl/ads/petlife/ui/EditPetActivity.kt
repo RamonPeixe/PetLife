@@ -1,8 +1,9 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.ifsp.scl.ads.petlife.R
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityEditPetBinding
 
 class EditPetActivity : AppCompatActivity() {
@@ -21,7 +22,9 @@ class EditPetActivity : AppCompatActivity() {
         aepb.tipoPetSp.adapter = adapterTipo
 
         //Configura o spinner portes
-        val portesPet = arrayOf(getString(R.string.porte_pet_pequeno), getString(R.string.porte_pet_medio), getString(R.string.porte_pet_grande))
+        val portesPet = arrayOf(getString(R.string.porte_pet_pequeno), getString(R.string.porte_pet_medio), getString(
+            R.string.porte_pet_grande
+        ))
         val adapterPorte = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, portesPet)
         aepb.portePetSp.adapter = adapterPorte
 

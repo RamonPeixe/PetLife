@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.model
 
 //Define classe Pet com os dados
 data class Pet(

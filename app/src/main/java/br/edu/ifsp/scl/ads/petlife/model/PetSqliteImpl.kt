@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import br.edu.ifsp.scl.ads.petlife.Pet
 
 class PetSqliteImpl(context: Context) : PetDao {
     companion object {

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import br.edu.ifsp.scl.ads.petlife.Pet
+import br.edu.ifsp.scl.ads.petlife.model.Pet
 import br.edu.ifsp.scl.ads.petlife.R
 
 class PetAdapter(context: Context, private val pets: MutableList<Pet>) :

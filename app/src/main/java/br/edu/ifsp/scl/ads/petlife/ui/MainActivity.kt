@@ -1,18 +1,19 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.ifsp.scl.ads.petlife.R
+import br.edu.ifsp.scl.ads.petlife.model.Pet
+import br.edu.ifsp.scl.ads.petlife.controller.MainController
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
-import br.edu.ifsp.scl.ads.petlife.model.PetSqliteImpl
-import br.edu.ifsp.scl.ads.petlife.ui.PetAdapter
 
 class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-    private val petDatabase by lazy { PetSqliteImpl(this) }
+    private val mainController by lazy { MainController(this) }
     private val petList = mutableListOf<Pet>()
     private val petAdapter by lazy { PetAdapter(this, petList) }
 
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                         ultimaVacina = "",
                         ultimaIdaPetshop = ""
                     )
-                    petDatabase.createPet(pet)
+                    mainController.insertPet(pet)  // Usando o MainController
                     loadPets()
                 }
             }
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadPets() {
         petList.clear()
-        petList.addAll(petDatabase.retrievePets())
+        petList.addAll(mainController.getPets())
         petAdapter.notifyDataSetChanged()
     }
 }
