@@ -16,8 +16,8 @@ class EventAdapter(context: Context, private val events: MutableList<Event>) :
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.tile_event, parent, false)
         val event = events[position]
 
-        val typeTv = view.findViewById<TextView>(R.id.eventTypeTv)
-        val dateTv = view.findViewById<TextView>(R.id.eventDateTv)
+        val typeTv = view.findViewById<TextView>(R.id.typeTv)
+        val dateTv = view.findViewById<TextView>(R.id.dateTv)
 
         typeTv.text = event.type
         dateTv.text = event.date

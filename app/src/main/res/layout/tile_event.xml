@@ -6,17 +6,15 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/eventTypeTv"
+        android:id="@+id/typeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tipo do Evento"
-        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/eventDateTv"
+        android:id="@+id/dateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Data do Evento"
-        android:textSize="14sp" />
+        android:text="Data do Evento" />
 </LinearLayout>

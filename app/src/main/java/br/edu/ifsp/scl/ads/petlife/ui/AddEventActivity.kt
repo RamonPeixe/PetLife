@@ -20,18 +20,31 @@ class AddEventActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, eventTypes)
         aevb.eventTypeSp.adapter = adapter
 
+        // Recebe dados se for uma edição
+        val eventId = intent.getIntExtra("id", -1)
+        val petId = intent.getIntExtra("petId", -1)
+        val eventType = intent.getStringExtra("eventType") ?: ""
+        val eventDate = intent.getStringExtra("eventDate") ?: ""
+        val eventDescription = intent.getStringExtra("eventDescription") ?: ""
+
+        aevb.eventDateEt.setText(eventDate)
+        aevb.eventDescriptionEt.setText(eventDescription)
+        aevb.eventTypeSp.setSelection(eventTypes.indexOf(eventType))
+
         // Botão salvar com validação
         aevb.saveEventBtn.setOnClickListener {
             if (validateFields()) {
-                val eventType = aevb.eventTypeSp.selectedItem.toString()
-                val eventDate = aevb.eventDateEt.text.toString()
-                val eventDescription = aevb.eventDescriptionEt.text.toString()
+                val type = aevb.eventTypeSp.selectedItem.toString()
+                val date = aevb.eventDateEt.text.toString()
+                val description = aevb.eventDescriptionEt.text.toString()
 
-                // Retorna o evento criado para a EventActivity
+                // Retorna o evento criado/editado
                 val resultIntent = intent.apply {
-                    putExtra("eventType", eventType)
-                    putExtra("eventDate", eventDate)
-                    putExtra("eventDescription", eventDescription)
+                    putExtra("id", eventId)
+                    putExtra("eventType", type)
+                    putExtra("eventDate", date)
+                    putExtra("eventDescription", description)
+                    putExtra("petId", petId)
                 }
                 setResult(RESULT_OK, resultIntent)
                 finish()
@@ -39,7 +52,6 @@ class AddEventActivity : AppCompatActivity() {
         }
     }
 
-    // Valida os campos
     private fun validateFields(): Boolean {
         return when {
             aevb.eventTypeSp.selectedItem == null -> {
@@ -58,7 +70,6 @@ class AddEventActivity : AppCompatActivity() {
         }
     }
 
-    // Exibe mensagem de erro
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

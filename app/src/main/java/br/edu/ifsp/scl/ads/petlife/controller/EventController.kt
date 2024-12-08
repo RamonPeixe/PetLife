@@ -10,4 +10,5 @@ class EventController(eventActivity: EventActivity) {
 
     fun addEvent(event: Event) = eventDao.createEvent(event)
     fun getEvents(petId: Int): MutableList<Event> = eventDao.retrieveEvents(petId)
+    fun updateEvent(event: Event) = eventDao.updateEvent(event)
 }
