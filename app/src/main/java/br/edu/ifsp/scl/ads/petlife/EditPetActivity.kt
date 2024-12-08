@@ -26,11 +26,11 @@ class EditPetActivity : AppCompatActivity() {
         aepb.portePetSp.adapter = adapterPorte
 
         //Recebe os dados do pet da Intent
-        val nome = intent.getStringExtra("nome") ?: "Nome não informado"
-        val dataNascimento = intent.getStringExtra("dataNascimento") ?: "Data não informada"
-        val tipo = intent.getStringExtra("tipo") ?: "Tipo não informado"
-        val cor = intent.getStringExtra("cor") ?: "Cor não informada"
-        val porte = intent.getStringExtra("porte") ?: "Porte não informado"
+        val nome = intent.getStringExtra("nome") ?: ""
+        val dataNascimento = intent.getStringExtra("dataNascimento") ?: ""
+        val tipo = intent.getStringExtra("tipo") ?: ""
+        val cor = intent.getStringExtra("cor") ?: ""
+        val porte = intent.getStringExtra("porte") ?: ""
 
         //Preenche os campos com os dados
         aepb.nomePetEt.setText(nome)

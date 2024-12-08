@@ -17,141 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/nomePetTv"
+    <Button
+        android:id="@+id/addPetBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nome_pet_label"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbarTb"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="@string/Add"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/dataNascimentoTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/data_nascimento_label"
-        app:layout_constraintTop_toBottomOf="@id/nomePetTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/tipoPetTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tipo_pet_label"
-        app:layout_constraintTop_toBottomOf="@id/dataNascimentoTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/corPetTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cor_pet_label"
-        app:layout_constraintTop_toBottomOf="@id/tipoPetTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/portePetTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/porte_pet_label"
-        app:layout_constraintTop_toBottomOf="@id/corPetTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/ultimaVisitaVeterinarioTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ultima_visita_veterinario_label"
-        app:layout_constraintTop_toBottomOf="@id/portePetTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/ultimaVacinaTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ultima_vacina_label"
-        app:layout_constraintTop_toBottomOf="@id/ultimaVisitaVeterinarioTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/ultimaIdaPetshopTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ultima_ida_petshop_label"
-        app:layout_constraintTop_toBottomOf="@id/ultimaVacinaTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/ultimaIdaPetshopTv"
-        android:layout_marginTop="32dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/editarDadosPetBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/editar_dados_pet"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarStyle"/>
-
-            <Button
-                android:id="@+id/editarVacinaBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/editar_vacina"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarStyle"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <Button
-                android:id="@+id/editarVeterinarioBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/editar_visita_veterinario"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarStyle"/>
-
-            <Button
-                android:id="@+id/editarPetshopBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/editar_ida_petshop"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarStyle"/>
-
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
