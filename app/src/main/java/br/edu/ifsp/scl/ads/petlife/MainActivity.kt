@@ -117,30 +117,6 @@ class MainActivity : AppCompatActivity() {
             }
             editPetLauncher.launch(intent) //Chama a activity para editar
         }
-
-        //Configura o botão para editar a última visita ao veterinário
-        amb.editarVeterinarioBtn.setOnClickListener {
-            val intent = Intent(this, EditVeterinarioActivity::class.java).apply {
-                putExtra("ultimaVisitaVeterinario", pet.ultimaVisitaVeterinario)
-            }
-            editVeterinarioLauncher.launch(intent) //Chama a activity para editar
-        }
-
-        //Configura o botão para editar a última vacina
-        amb.editarVacinaBtn.setOnClickListener {
-            val intent = Intent(this, EditVacinaActivity::class.java).apply {
-                putExtra("ultimaVacina", pet.ultimaVacina)
-            }
-            editVacinaLauncher.launch(intent) //Chama a activity para editar
-        }
-
-        //Configura o botão para editar a última ida ao petshop
-        amb.editarPetshopBtn.setOnClickListener {
-            val intent = Intent(this, EditPetshopActivity::class.java).apply {
-                putExtra("ultimaIdaPetshop", pet.ultimaIdaPetshop)
-            }
-            editPetshopLauncher.launch(intent) //Chama a activity para editar
-        }
     }
 
     //Função para exibir as informações do pet
