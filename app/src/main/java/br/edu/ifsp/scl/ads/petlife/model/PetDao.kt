@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.petlife.model
 
+// Interface que define as operações para o pet
 interface PetDao {
     fun createPet(pet: Pet): Long
     fun retrievePets(): MutableList<Pet>

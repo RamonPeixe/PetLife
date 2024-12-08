@@ -5,7 +5,9 @@ import br.edu.ifsp.scl.ads.petlife.model.PetDao
 import br.edu.ifsp.scl.ads.petlife.model.PetSqliteImpl
 import br.edu.ifsp.scl.ads.petlife.ui.MainActivity
 
+// Controller que controla as operações do pet
 class MainController(mainActivity: MainActivity) {
+    // Instancia o DAO
     private val petDao: PetDao = PetSqliteImpl(mainActivity)
 
     fun insertPet(pet: Pet) = petDao.createPet(pet)

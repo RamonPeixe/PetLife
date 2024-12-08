@@ -16,6 +16,7 @@ class PetSqliteImpl(context: Context) : PetDao {
         private const val COLOR_COLUMN = "color"
         private const val SIZE_COLUMN = "size"
 
+        // Cria tabela
         private const val CREATE_PET_TABLE_STATEMENT = """
             CREATE TABLE IF NOT EXISTS $PET_TABLE (
                 $ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,16 +31,17 @@ class PetSqliteImpl(context: Context) : PetDao {
 
     private val database: SQLiteDatabase = context.openOrCreateDatabase(
         PET_DATABASE_FILE, Context.MODE_PRIVATE, null
-    )
+    ) // Abre/cria o banco
 
     init {
         try {
-            database.execSQL(CREATE_PET_TABLE_STATEMENT)
+            database.execSQL(CREATE_PET_TABLE_STATEMENT) // Cria a tabela, se não existir
         } catch (e: Exception) {
             Log.e("PetSqliteImpl", "Error creating database: ${e.message}")
         }
     }
 
+    // Função para criar pet
     override fun createPet(pet: Pet): Long {
         val values = ContentValues().apply {
             put(NAME_COLUMN, pet.nome)
@@ -48,12 +50,12 @@ class PetSqliteImpl(context: Context) : PetDao {
             put(COLOR_COLUMN, pet.cor)
             put(SIZE_COLUMN, pet.porte)
         }
-        return database.insert(PET_TABLE, null, values)
+        return database.insert(PET_TABLE, null, values) // Insere no banco
     }
 
     override fun retrievePets(): MutableList<Pet> {
         val pets = mutableListOf<Pet>()
-        val cursor = database.rawQuery("SELECT * FROM $PET_TABLE", null)
+        val cursor = database.rawQuery("SELECT * FROM $PET_TABLE", null) // Consulta os pets
 
         while (cursor.moveToNext()) {
             pets.add(
@@ -65,12 +67,13 @@ class PetSqliteImpl(context: Context) : PetDao {
                     cor = cursor.getString(cursor.getColumnIndexOrThrow(COLOR_COLUMN)),
                     porte = cursor.getString(cursor.getColumnIndexOrThrow(SIZE_COLUMN))
                 )
-            )
+            ) // Adiciona os pets à lista
         }
-        cursor.close()
-        return pets
+        cursor.close() // Fecha o cursor
+        return pets // Retorna a lista
     }
 
+    // Função para att pet
     override fun updatePet(pet: Pet): Int {
         val values = ContentValues().apply {
             put(NAME_COLUMN, pet.nome)
@@ -84,9 +87,10 @@ class PetSqliteImpl(context: Context) : PetDao {
             values,
             "$ID_COLUMN = ?",
             arrayOf(pet.id.toString())
-        )
+        ) // Atualiza o registro
     }
 
+    // Função para excluir pet
     override fun deletePet(id: Int): Int {
         return database.delete(PET_TABLE, "$ID_COLUMN = ?", arrayOf(id.toString()))
     }

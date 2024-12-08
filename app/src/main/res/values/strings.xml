@@ -21,4 +21,7 @@
     <string name="tipo_do_pet">Tipo do Pet</string>
     <string name="editar_pet">Editar</string>
     <string name="remover_pet">Remover</string>
+
+    <!-- Nome do pet -->
+    <string name="events_of">Eventos de %1$s</string>
 </resources>

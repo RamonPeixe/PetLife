@@ -14,13 +14,17 @@ import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.ads.petlife.model.Pet
 
 class MainActivity : AppCompatActivity() {
+    // ViewBinding para acessar os elementos do layout
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    // Controller para operações com pets
     private val mainController by lazy { MainController(this) }
-    private val petList = mutableListOf<Pet>()
+    private val petList = mutableListOf<Pet>() // Lista de pets para exibição
     private val petAdapter by lazy { PetAdapter(this, petList) }
 
+    // Launcher para tratar o resultado da tela de edição de pet
     private val editPetLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -34,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 val porte = it.getStringExtra("porte") ?: ""
 
                 if (id == -1) {
-                    // Novo pet
+                    // Adiciona um novo pet
                     mainController.insertPet(
                         Pet(
                             nome = nome,
@@ -45,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 } else {
-                    // Atualiza pet
+                    // Atualiza um pet existente
                     mainController.updatePet(
                         Pet(
                             id = id,
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                loadPets()
+                loadPets() // Recarrega a lista após mudanças
             }
         }
     }
@@ -66,36 +70,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
 
+        // Configura a toolbar
         setSupportActionBar(amb.toolbarTb)
         supportActionBar?.title = getString(R.string.app_name)
 
+        // Configura o ListView com o adapter
         amb.petLv.adapter = petAdapter
-        loadPets()
+        loadPets() // Carrega os pets ao iniciar
 
+        // Registra o menu de contexto no ListView
         registerForContextMenu(amb.petLv)
 
-        // Clique curto para abrir a tela de eventos
+        // Clique curto para abrir a tela de eventos do pet
         amb.petLv.setOnItemClickListener { _, _, position, _ ->
             val selectedPet = petList[position]
             val intent = Intent(this, EventActivity::class.java).apply {
-                putExtra("id", selectedPet.id)
-                putExtra("nome", selectedPet.nome)
+                putExtra("id", selectedPet.id) // Passa o ID do pet
+                putExtra("nome", selectedPet.nome) // Passa o nome do pet
             }
             startActivity(intent)
         }
 
+        // Botão para adicionar um novo pet
         amb.addPetBtn.setOnClickListener {
             val intent = Intent(this, EditPetActivity::class.java)
             editPetLauncher.launch(intent)
         }
     }
 
+    // Carrega os pets do banco e atualiza a lista
     private fun loadPets() {
         petList.clear()
         petList.addAll(mainController.getPets())
         petAdapter.notifyDataSetChanged()
     }
 
+    // Cria o menu de contexto para o ListView
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -105,12 +115,14 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.context_menu_pet, menu)
     }
 
+    // Trata os itens selecionados no menu de contexto
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
         val selectedPet = petList[info.position]
 
         return when (item.itemId) {
             R.id.editPetMi -> {
+                // Abre a tela de edição com os dados do pet
                 val intent = Intent(this, EditPetActivity::class.java).apply {
                     putExtra("id", selectedPet.id)
                     putExtra("nome", selectedPet.nome)
@@ -123,8 +135,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.removePetMi -> {
+                // Remove o pet selecionado
                 mainController.removePet(selectedPet.id)
-                loadPets()
+                loadPets() // Recarrega a lista após a remoção
                 true
             }
             else -> super.onContextItemSelected(item)

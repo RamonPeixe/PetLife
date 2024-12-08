@@ -24,7 +24,7 @@ class EditPetActivity : AppCompatActivity() {
         val adapterPorte = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, portesPet)
         aepb.portePetSp.adapter = adapterPorte
 
-        // Recebe os dados se for uma edição
+        // Verifica se é edição e preenche os campos
         val id = intent.getIntExtra("id", -1)
         val nome = intent.getStringExtra("nome") ?: ""
         val dataNascimento = intent.getStringExtra("dataNascimento") ?: ""
@@ -55,7 +55,7 @@ class EditPetActivity : AppCompatActivity() {
         }
     }
 
-    // validar campos
+    // valida os campos
     private fun validateFields(): Boolean {
         return when {
             aepb.nomePetEt.text.isNullOrEmpty() -> {
@@ -82,7 +82,7 @@ class EditPetActivity : AppCompatActivity() {
         }
     }
 
-    // exibe toast
+    // Exibe mensagem de erro
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

@@ -14,14 +14,18 @@ import br.edu.ifsp.scl.ads.petlife.databinding.ActivityEventBinding
 import br.edu.ifsp.scl.ads.petlife.model.Event
 
 class EventActivity : AppCompatActivity() {
+    // ViewBinding para acessar os elementos do layout
     private val aeb: ActivityEventBinding by lazy {
         ActivityEventBinding.inflate(layoutInflater)
     }
+
+    // Controller para operações com eventos
     private val eventController by lazy { EventController(this) }
-    private val eventList = mutableListOf<Event>()
+    private val eventList = mutableListOf<Event>() // Lista de eventos para exibição
     private val eventAdapter by lazy { EventAdapter(this, eventList) }
 
-    private val addEditEventLauncher = registerForActivityResult(
+    // Launcher para tratar o resultado da tela de edição de eventos
+    private val addEventLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
@@ -32,29 +36,31 @@ class EventActivity : AppCompatActivity() {
                 val eventDescription = it.getStringExtra("eventDescription") ?: ""
                 val petId = intent.getIntExtra("id", -1)
 
-                if (eventId == -1) {
-                    // Novo evento
-                    eventController.addEvent(
-                        Event(
-                            petId = petId,
-                            type = eventType,
-                            date = eventDate,
-                            description = eventDescription
+                if (petId != -1) {
+                    if (eventId == -1) {
+                        // Adiciona um novo evento
+                        eventController.addEvent(
+                            Event(
+                                petId = petId,
+                                type = eventType,
+                                date = eventDate,
+                                description = eventDescription
+                            )
                         )
-                    )
-                } else {
-                    // Atualiza evento
-                    eventController.updateEvent(
-                        Event(
-                            id = eventId,
-                            petId = petId,
-                            type = eventType,
-                            date = eventDate,
-                            description = eventDescription
+                    } else {
+                        // Atualiza um evento existente
+                        eventController.updateEvent(
+                            Event(
+                                id = eventId,
+                                petId = petId,
+                                type = eventType,
+                                date = eventDate,
+                                description = eventDescription
+                            )
                         )
-                    )
+                    }
+                    loadEvents(petId) // Recarrega a lista após mudanças
                 }
-                loadEvents(petId)
             }
         }
     }
@@ -63,38 +69,39 @@ class EventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(aeb.root)
 
-        // Configura o nome do pet
+        // Obtém o nome do pet
         val petName = intent.getStringExtra("nome") ?: "Desconhecido"
         val petId = intent.getIntExtra("id", -1)
 
         // Configura a toolbar
         setSupportActionBar(aeb.toolbarTb)
         supportActionBar?.title = getString(R.string.event_list)
-        aeb.petNameTv.text = "Eventos de $petName"
+        aeb.petNameTv.text = getString(R.string.events_of, petName)
 
-        // Configura o ListView e registra o menu de contexto
+        // Configura o ListView com o adapter
         aeb.eventLv.adapter = eventAdapter
-        registerForContextMenu(aeb.eventLv)
+        registerForContextMenu(aeb.eventLv) // Registra o menu de contexto
 
-        // Carrega os eventos do pet
+        // Carrega os eventos relacionados ao pet
         if (petId != -1) {
             loadEvents(petId)
         }
 
-        // Configura o botão de adicionar eventos
+        // Botão para adicionar um novo evento
         aeb.addEventBtn.setOnClickListener {
             val intent = Intent(this, AddEventActivity::class.java)
-            intent.putExtra("petId", petId)
-            addEditEventLauncher.launch(intent)
+            addEventLauncher.launch(intent)
         }
     }
 
+    // Carrega os eventos do banco e atualiza a lista
     private fun loadEvents(petId: Int) {
         eventList.clear()
         eventList.addAll(eventController.getEvents(petId))
         eventAdapter.notifyDataSetChanged()
     }
 
+    // Cria o menu de contexto para o ListView
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -104,25 +111,27 @@ class EventActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.context_menu_event, menu)
     }
 
+    // Trata os itens selecionados no menu de contexto
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
         val selectedEvent = eventList[info.position]
 
         return when (item.itemId) {
             R.id.editEventMi -> {
+                // Abre a tela de edição com os dados do evento
                 val intent = Intent(this, AddEventActivity::class.java).apply {
                     putExtra("id", selectedEvent.id)
                     putExtra("eventType", selectedEvent.type)
                     putExtra("eventDate", selectedEvent.date)
                     putExtra("eventDescription", selectedEvent.description)
-                    putExtra("petId", selectedEvent.petId)
                 }
-                addEditEventLauncher.launch(intent)
+                addEventLauncher.launch(intent)
                 true
             }
             R.id.removeEventMi -> {
-                //eventController.removeEvent(selectedEvent.id)
-                loadEvents(selectedEvent.petId)
+                // Remove o evento selecionado
+                eventController.removeEvent(selectedEvent.id)
+                loadEvents(selectedEvent.petId) // Recarrega a lista após remoção
                 true
             }
             else -> super.onContextItemSelected(item)
