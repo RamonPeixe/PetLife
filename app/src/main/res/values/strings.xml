@@ -19,6 +19,6 @@
     <string name="Add">+</string>
     <string name="nome_do_pet">Nome do Pet</string>
     <string name="tipo_do_pet">Tipo do Pet</string>
-    <string name="editar_pet">Editar Pet</string>
-    <string name="remover_pet">Remover Pet</string>
+    <string name="editar_pet">Editar</string>
+    <string name="remover_pet">Remover</string>
 </resources>

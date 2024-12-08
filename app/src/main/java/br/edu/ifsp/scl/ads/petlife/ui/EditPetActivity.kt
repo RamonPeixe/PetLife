@@ -3,7 +3,6 @@ package br.edu.ifsp.scl.ads.petlife.ui
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import br.edu.ifsp.scl.ads.petlife.R
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityEditPetBinding
 
 class EditPetActivity : AppCompatActivity() {
@@ -13,43 +12,35 @@ class EditPetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Define o layout
         setContentView(aepb.root)
 
-        //Configura o spinner tipos
-        val tiposPet = arrayOf(getString(R.string.tipo_pet_cao), getString(R.string.tipo_pet_gato))
+        // Configurações dos spinners
+        val tiposPet = arrayOf("Cão", "Gato")
         val adapterTipo = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposPet)
         aepb.tipoPetSp.adapter = adapterTipo
 
-        //Configura o spinner portes
-        val portesPet = arrayOf(getString(R.string.porte_pet_pequeno), getString(R.string.porte_pet_medio), getString(
-            R.string.porte_pet_grande
-        ))
+        val portesPet = arrayOf("Pequeno", "Médio", "Grande")
         val adapterPorte = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, portesPet)
         aepb.portePetSp.adapter = adapterPorte
 
-        //Recebe os dados do pet da Intent
+        // Recebe os dados se for uma edição
+        val id = intent.getIntExtra("id", -1)
         val nome = intent.getStringExtra("nome") ?: ""
         val dataNascimento = intent.getStringExtra("dataNascimento") ?: ""
         val tipo = intent.getStringExtra("tipo") ?: ""
         val cor = intent.getStringExtra("cor") ?: ""
         val porte = intent.getStringExtra("porte") ?: ""
 
-        //Preenche os campos com os dados
         aepb.nomePetEt.setText(nome)
         aepb.dataNascimentoPetEt.setText(dataNascimento)
         aepb.corPetEt.setText(cor)
+        aepb.tipoPetSp.setSelection(adapterTipo.getPosition(tipo))
+        aepb.portePetSp.setSelection(adapterPorte.getPosition(porte))
 
-        //Coloca a seleção certa no spinner
-        val positionTipo = adapterTipo.getPosition(tipo)
-        aepb.tipoPetSp.setSelection(positionTipo)
-
-        val positionPorte = adapterPorte.getPosition(porte)
-        aepb.portePetSp.setSelection(positionPorte)
-
-        //Configura o botão de salvar para retornar os dados atualizados
+        // Botão salvar
         aepb.salvarBtn.setOnClickListener {
             val intent = intent.apply {
+                putExtra("id", id)
                 putExtra("nome", aepb.nomePetEt.text.toString())
                 putExtra("dataNascimento", aepb.dataNascimentoPetEt.text.toString())
                 putExtra("tipo", aepb.tipoPetSp.selectedItem.toString())
@@ -57,7 +48,7 @@ class EditPetActivity : AppCompatActivity() {
                 putExtra("porte", aepb.portePetSp.selectedItem.toString())
             }
             setResult(RESULT_OK, intent)
-            finish()  //Finaliza a activity
+            finish()
         }
     }
 }

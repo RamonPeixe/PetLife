@@ -10,4 +10,5 @@ class MainController(mainActivity: MainActivity) {
 
     fun insertPet(pet: Pet) = petDao.createPet(pet)
     fun getPets(): MutableList<Pet> = petDao.retrievePets()
+    fun updatePet(pet: Pet) = petDao.updatePet(pet)
 }
