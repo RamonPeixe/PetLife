@@ -7,3 +7,4 @@ interface EventDao {
     fun updateEvent(event: Event): Int
     fun deleteEvent(eventId: Int): Int
 }
+

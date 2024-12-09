@@ -34,6 +34,7 @@ class EventActivity : AppCompatActivity() {
                 val eventType = it.getStringExtra("eventType") ?: ""
                 val eventDate = it.getStringExtra("eventDate") ?: ""
                 val eventDescription = it.getStringExtra("eventDescription") ?: ""
+                val eventTime = it.getStringExtra("eventTime") ?: ""
                 val petId = intent.getIntExtra("id", -1)
 
                 if (petId != -1) {
@@ -44,7 +45,8 @@ class EventActivity : AppCompatActivity() {
                                 petId = petId,
                                 type = eventType,
                                 date = eventDate,
-                                description = eventDescription
+                                description = eventDescription,
+                                time = if (eventType == "Remédio") eventTime else null
                             )
                         )
                     } else {
@@ -55,7 +57,8 @@ class EventActivity : AppCompatActivity() {
                                 petId = petId,
                                 type = eventType,
                                 date = eventDate,
-                                description = eventDescription
+                                description = eventDescription,
+                                time = if (eventType == "Remédio") eventTime else null
                             )
                         )
                     }
@@ -78,7 +81,7 @@ class EventActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.event_list)
         aeb.petNameTv.text = getString(R.string.events_of, petName)
 
-        // Configura o ListView com o adapter
+        // Configura o listview
         aeb.eventLv.adapter = eventAdapter
         registerForContextMenu(aeb.eventLv) // Registra o menu de contexto
 
@@ -124,6 +127,7 @@ class EventActivity : AppCompatActivity() {
                     putExtra("eventType", selectedEvent.type)
                     putExtra("eventDate", selectedEvent.date)
                     putExtra("eventDescription", selectedEvent.description)
+                    putExtra("eventTime", selectedEvent.time ?: "")
                 }
                 addEventLauncher.launch(intent)
                 true

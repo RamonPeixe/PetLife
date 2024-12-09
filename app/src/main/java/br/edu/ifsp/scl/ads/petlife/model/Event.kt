@@ -6,5 +6,6 @@ data class Event(
     val petId: Int,
     val type: String,
     val date: String,
-    val description: String
+    val description: String,
+    val time: String? = null
 )
